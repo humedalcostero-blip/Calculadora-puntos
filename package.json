@@ -1,0 +1,1 @@
+{"name":"a-la-mesa","version":"2.0.0","private":true,"description":"Marcador de juegos para celular sin dependencias de producción","scripts":{"start":"node server.cjs","test":"node --test tests/*.test.cjs","build":"node build.cjs"}}
