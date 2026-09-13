@@ -1,0 +1,4 @@
+const http=require('node:http'), fs=require('node:fs'), path=require('node:path');
+const allowed=new Set(['index.html','styles.css','score-engine.js','app.js','sw.js','icon.svg','manifest.webmanifest']);
+const mime={'.html':'text/html; charset=utf-8','.css':'text/css; charset=utf-8','.js':'text/javascript; charset=utf-8','.svg':'image/svg+xml','.webmanifest':'application/manifest+json'};
+http.createServer((req,res)=>{const name=new URL(req.url,'http://localhost').pathname.slice(1)||'index.html';if(!allowed.has(name)){res.writeHead(404);return res.end('No encontrado');}res.writeHead(200,{'Content-Type':mime[path.extname(name)]||'text/plain','Cache-Control':'no-cache'});fs.createReadStream(path.join(__dirname,name)).pipe(res);}).listen(4173,'127.0.0.1',()=>console.log('Local: http://127.0.0.1:4173'));
